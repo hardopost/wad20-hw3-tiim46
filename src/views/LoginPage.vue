@@ -1,21 +1,22 @@
 <template>
   <div class="login-page">
-
-    <p>See on login leht!</p>
-
-    <HelloWorld msg="Welcome to Your Vue.js App"/> <!--Komponendi sisse toomine-->
-
+    <Login/> <!--Komponendi sisse toomine-->
   </div>
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld.vue'
+import Login from "@/components/Login";
 
 export default {
   name: "LoginPage.vue",
 
   components: {
-    HelloWorld //komponendi sissetoomine
+    Login
+  },
+  methods: {
+    loginButtonPressed: function() {
+
+    }
   }
 }
 </script>
