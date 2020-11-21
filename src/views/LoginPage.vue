@@ -12,11 +12,6 @@ export default {
 
   components: {
     Login
-  },
-  methods: {
-    loginButtonPressed: function() {
-
-    }
   }
 }
 </script>
