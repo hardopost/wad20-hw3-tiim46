@@ -1,12 +1,20 @@
 <template>
   <div class="browse-page">
-    <h1>See on profiilide lehekülg</h1>
+    <Header/>
+    <Profiles/>
   </div>
 </template>
 
 <script>
+import Profiles from "@/components/Profiles";
+import Header from "@/components/Header";
+
 export default {
-  name: "BrowsePage.vue"
+  name: "BrowsePage.vue",
+  components: {
+    Header,
+    Profiles
+  }
 }
 </script>
 

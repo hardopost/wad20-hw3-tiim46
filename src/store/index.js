@@ -8,7 +8,8 @@ Vue.use(Vuex)
 
 //to handle state
 const state = {
-    posts: []
+    posts: [],
+    profiles: []
 }
 
 //to handle state
@@ -22,6 +23,12 @@ const actions = {
         then(response => {
             commit('SET_POSTS', response.data)
         })
+    },
+    getProfiles({commit}) {
+        axios.get('https://private-anon-3956ba9be8-wad20postit.apiary-mock.com/profiles').
+        then(response => {
+            commit('SET_POSTS', response.data)
+        })
     }
 }
 
@@ -29,6 +36,9 @@ const actions = {
 const mutations = {
     SET_POSTS(state, posts) {
         state.posts = posts
+    },
+    SET_PROFILES(state, profiles) {
+        state.profiles = profiles
     }
 }
 
