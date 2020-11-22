@@ -1,15 +1,17 @@
 <template>
   <div class="main-page">
-    <h1>See on postituste leht</h1>
+    <Header></Header>
     <posts></posts>
   </div>
 </template>
 
 <script>
 import Posts from "@/components/Posts";
+import Header from "@/components/Header";
 export default {
   name: "MainPage.vue",
-  components: {Posts}
+  components: {Posts,
+  Header}
 }
 </script>
 
