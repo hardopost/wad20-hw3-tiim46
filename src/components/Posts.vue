@@ -3,14 +3,15 @@
   <section class="main-container">
      <div class="post"  v-for="post in posts" :key="post.id">
          <div class="post-author">
-             <span class="post-author-info">
-               <img src="../assets/1.jpg">
-               <small>John Doe</small>
+           <span class="post-author-info">
+               <img :src=post.author.avatar>
+               <small>{{post.author.firstname}} {{post.author.lastname}}</small>
              </span>
            <small>{{post.createTime}}</small>
          </div>
          <div class="post-image">
-           <img src="../assets/1.jpg" alt="">
+           <img v-if="post.media !== null && post.media.type === 'image'" :src=post.media.url alt="">
+           <video v-else-if="post.media !== null && post.media.type === 'video'" :src="post.media.url" controls></video>
          </div>
          <div class="post-title">
            <h3>{{post.text}}</h3>
@@ -27,6 +28,8 @@
 <script>
 export default {
   name: "Posts",
+
+
   computed: {
     posts() {
       return this.$store.state.posts
