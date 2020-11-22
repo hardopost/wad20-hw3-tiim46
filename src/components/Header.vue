@@ -1,16 +1,17 @@
 <template>
   <header>
-    <nav>
+    <nav @click="dropdownActive()">
       <div class="logo-container">
         <img src="../../images/logo.png" alt="postIt">
       </div>
       <div class="search-container">
         <input type="text" name="search"><button type="button">Search</button>
       </div>
-      <div id="myDropdown" class="dropdown-content">
+      <div v-show="clicked" id="myDropdown" class="dropdown-content">
         <a id="info">Link 1</a>
         <a @click="$router.push('main-page')">Main page</a>
-        <a @click="$router.push('login-page')">Log out</a>
+        <a @click="$router.push('browse-page')">Browse</a>
+        <a @click="$router.push('/')">Log out</a>
       </div>
       <div class="avatar-container">
         <img src="../../images/avatar.png" class="avatar" alt="Me">
@@ -21,41 +22,79 @@
 
 <script>
 export default {
-  name: "Header"
+  name: "Header",
+  data: function () {
+    return {
+      clicked: true
+    }
+  },
+  methods: {
+    dropdownActive: function() {
+      this.clicked = !this.clicked
+    }
+  }
 }
 </script>
 
 <style scoped>
+* {
+  font-family: 'Roboto Slab', serif;
+  outline: none;
+}
 
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  right: 0;
+html, body {
+  margin: 0;
   padding: 0;
-  height: auto;
-  top: 50px;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  width: 100%;
+  height: 100%;
 }
 
-/* Links inside the dropdown */
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
+body {
+  background-color: #0277bd;
+  color: #263238;
 }
 
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {
-  background-color: #ddd
+a {
+  color: #40c4ff;
 }
 
-.dropdown-content a:not(:first-child) {
-  border-top: 1px solid lightgrey;
+.login-page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#login-container {
+  background-image: url(../../images/logo.png);
+  background-size: 20% auto;
+  background-repeat: no-repeat;
+  background-position: 15px 15px;
+  min-width: 25%;
+  padding: 45px 45px;
+  background-color: #ffffff;
+  box-shadow: 0 0 15px rgba(38, 50, 56, 0.33);
+  text-align: center;
+}
+
+#login-container form div > input {
+  padding: 8px 16px;
+  margin: 4px 0;
+}
+
+button {
+  padding: 8px 16px;
+  margin: 4px 0;
+  color: #ffffff;
+  background-color: #01579b;
+  border: none;
+  border-radius: 4px;
+}
+
+button:hover {
+  box-shadow: 0 0 5px rgba(38, 50, 56, 0.7);
+  cursor: pointer;
 }
 
 header {
@@ -67,10 +106,6 @@ header {
 
 header:hover {
   box-shadow: 0 -20px 30px #4d4d4d;
-}
-
-a {
-  color: #40c4ff;
 }
 
 nav {
@@ -110,6 +145,143 @@ nav div.search-container > button {
   padding: 5px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+nav div.avatar-container {
+  margin-right: 15px;
+  text-align: right;
+}
+
+.main-container {
+  width: 50%;
+  min-height: 100%;
+  margin: auto auto;
+  padding: 90px 15px 15px 15px;
+  background-color: #ffffff;
+}
+
+.post {
+  width: 80%;
+  margin: 15px auto;
+  box-shadow: 0 0 15px rgba(38, 50, 56, 0.33);
+  border-radius: 5px;
+}
+
+.post .post-author {
+  padding: 10px;
+}
+
+.post .post-author::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.post .post-author .post-author-info {
+  float: left;
+  position: relative;
+  width: 50%;
+}
+
+.post .post-author .post-author-info img {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  object-fit: cover;
+  object-position: top;
+  margin: 5px;
+}
+
+.post .post-author .post-author-info small {
+  position: absolute;
+  top: 10px;
+  left: 35px;
+}
+
+.post .post-author .post-author-info + small {
+  float: right;
+  color: grey;
+  padding: 10px;
+}
+
+.post .post-image img, video {
+  width: 100%;
+  min-height: 150px;
+  max-height: 350px;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.post .post-title {
+  padding: 10px;
+}
+
+.post .post-title h3 {
+  display: inline;
+}
+
+.post .post-title ~ .post-actions {
+  padding: 10px;
+}
+
+.like-button {
+  background-image: url(../../images/like.png);
+  background-size: 15px;
+  background-repeat: no-repeat;
+  background-position: 5px center;
+  background-color: #8a8a8a;
+  width: 60px;
+  height: 25px;
+  padding-left: 23px;
+  line-height: 10px;
+  text-align: left;
+  border: none;
+}
+
+.like-button.liked {
+  background-color: #01579b;
+}
+
+
+/* ----------------------------------------------------------------------- */
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: block;
+  position: absolute;
+  background-color: #f1f1f1;
+  right:0;
+  padding: 0;
+  height: auto;
+  top:50px;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd}
+
+.dropdown-content a:not(:first-child) {
+  border-top: 1px solid lightgrey;
+}
+
+.profile img {
+  border-radius: 50%;
+  width:100%;
+  height:100%;
+  max-width:150px;
+  max-height: 150px;
+  padding-top: 20px;
+  object-fit: cover;
 }
 
 </style>

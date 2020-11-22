@@ -10,8 +10,7 @@ import Posts from "@/components/Posts";
 import Header from "@/components/Header";
 export default {
   name: "MainPage.vue",
-  components: {Posts,
-  Header}
+  components: {Header, Posts}
 }
 </script>
 
